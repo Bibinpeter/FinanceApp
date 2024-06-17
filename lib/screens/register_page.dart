@@ -111,6 +111,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             width: 250,
                             color: Colors.deepOrange,
                             onTap: () async {
+                              //creating a unique id
                               var uuid=Uuid().v1();
 
                               if (_regKey.currentState!.validate()) {

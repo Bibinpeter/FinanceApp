@@ -35,7 +35,7 @@ class AuthService with ChangeNotifier {
     }
     for (var user in _userBox!.values){
       if(user.email==email && user.password==password){
-        await setLoggedInState(true);
+        await setLoggedInState(true,user.id);
 
         return user;
       }
@@ -45,13 +45,32 @@ class AuthService with ChangeNotifier {
   }
 
 
-  Future<void>setLoggedInState(bool isLoggedIn)async{
+  Future<void>setLoggedInState(bool isLoggedIn,String id)async{
   final _pref= await SharedPreferences.getInstance();
   await _pref.setBool(_loggedInKey, isLoggedIn);
+  await _pref.setString('id', id);
   }
 
   Future<bool>isUserLoggedIn()async{
     final _pref=await SharedPreferences.getInstance();
     return _pref.getBool(_loggedInKey)?? false;
   }
+
+  Future<UserModel?>getcurrentUser()async{
+final isLoggedIn=await isUserLoggedIn();
+if(isLoggedIn){
+  final loggedinUserId=await getCurrentUserId();
+  for(var user in _userBox!.values){
+    if(user.id==loggedinUserId){
+      return user;
+    }
+  }
+}
+  }
+
+  Future<String?>getCurrentUserId()async{
+    final _pref=await SharedPreferences.getInstance();
+    final id=await _pref.getString('id');
+    return id;
+   }
 }
