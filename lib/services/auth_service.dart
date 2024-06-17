@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user_model.dart';
 
@@ -34,10 +35,23 @@ class AuthService with ChangeNotifier {
     }
     for (var user in _userBox!.values){
       if(user.email==email && user.password==password){
+        await setLoggedInState(true);
+
         return user;
       }
 
     }
     return null;
+  }
+
+
+  Future<void>setLoggedInState(bool isLoggedIn)async{
+  final _pref= await SharedPreferences.getInstance();
+  await _pref.setBool(_loggedInKey, isLoggedIn);
+  }
+
+  Future<bool>isUserLoggedIn()async{
+    final _pref=await SharedPreferences.getInstance();
+    return _pref.getBool(_loggedInKey)?? false;
   }
 }

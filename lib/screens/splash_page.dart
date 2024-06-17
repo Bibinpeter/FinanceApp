@@ -1,4 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../services/auth_service.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -11,11 +16,27 @@ class _Splash_PageState extends State<SplashPage> {
 
   @override
   void initState(){
-   Future.delayed(Duration(seconds: 3),(){
-    Navigator.pushReplacementNamed(context, 'login');
-   });
+    checkLoginState();
     super.initState();
   }
+
+
+
+  Future<void>checkLoginState()async{
+    await Future.delayed(Duration(seconds: 4));
+    final authService=Provider.of<AuthService>(context,listen: false);
+    final isLoggedIn=await authService.isUserLoggedIn();
+     if(isLoggedIn){
+      Navigator.pushNamedAndRemoveUntil(context, 'Home',(routes)=>false);
+     }else{
+      Navigator.pushReplacementNamed(context,'login');
+     }
+  }
+
+
+
+
+
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: Colors.white,
