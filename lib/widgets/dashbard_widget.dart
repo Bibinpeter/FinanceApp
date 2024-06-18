@@ -20,7 +20,7 @@ class DashboardItemWidget extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [
-           Colors.red,
+           Colors.blue,
           Colors.teal
           ]
         ),

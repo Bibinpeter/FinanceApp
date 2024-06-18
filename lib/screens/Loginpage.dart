@@ -84,14 +84,14 @@ class _LoginPageState extends State<LoginPage> {
                             context: context,
                             barrierDismissible: false,
                             builder: (context) {
-                              return Center(
+                              return const Center(
                                 child: CircularProgressIndicator(),
                               );
                             });
                        final user=await authService.loginUser(_emailController.text.trim(), _passwordController.text);
                         Navigator.pop(context);
                         if(user!=null){
-                          Navigator.pushNamedAndRemoveUntil(context, 'Home', (route) => false,);
+                          Navigator.pushNamedAndRemoveUntil(context,'Home', (route) => false,);
                         }else{
 
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(

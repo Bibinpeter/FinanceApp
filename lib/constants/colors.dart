@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
 
-final Color scaffoldColor=Color(0xff003049);
-final Color chartColor1=Color(0xffd62828);
-final Color chartColor2=Color(0xff2a9d8f);
+final Color scaffoldColor=Colors.black;
+final Color chartColor1=Color.fromARGB(255, 220, 20, 20);
+final Color chartColor2=Color.fromARGB(255, 5, 246, 217);
