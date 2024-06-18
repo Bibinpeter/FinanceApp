@@ -40,15 +40,15 @@ class AuthService with ChangeNotifier {
   }
 
   Future<void> setLoggedInState(bool isLoggedIn, String id) async {
-    final _pref = await SharedPreferences.getInstance();
-    await _pref.setBool(_loggedInKey, isLoggedIn);
-    await _pref.setString('id', id);
+    final pref = await SharedPreferences.getInstance();
+    await pref.setBool(_loggedInKey, isLoggedIn);
+    await pref.setString('id', id);
     print("Logged in state set to $isLoggedIn for user $id");
   }
 
   Future<bool> isUserLoggedIn() async {
-    final _pref = await SharedPreferences.getInstance();
-    return _pref.getBool(_loggedInKey) ?? false;
+    final pref = await SharedPreferences.getInstance();
+    return pref.getBool(_loggedInKey) ?? false;
   }
 
   Future<UserModel?> getCurrentUser() async {
@@ -75,15 +75,15 @@ class AuthService with ChangeNotifier {
   }
 
   Future<String?> getCurrentUserId() async {
-    final _pref = await SharedPreferences.getInstance();
-    final id = _pref.getString("id");
+    final pref = await SharedPreferences.getInstance();
+    final id = pref.getString("id");
     print("Current user ID from preferences: $id");
     return id;
   }
 
   Future<bool> logOut() async {
-    final _pref = await SharedPreferences.getInstance();
-    await _pref.clear();
+    final pref = await SharedPreferences.getInstance();
+    await pref.clear();
     print("User logged out and preferences cleared");
     return true;
   }

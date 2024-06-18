@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:personalfinanceapp/constants/colors.dart';
 import 'package:personalfinanceapp/models/income_model.dart';
 import 'package:personalfinanceapp/services/auth_service.dart';
 import 'package:personalfinanceapp/services/finance_service.dart';
@@ -17,7 +18,8 @@ class ListIncomeTransactions extends StatelessWidget {
     final authService= Provider.of<AuthService>(context,listen: false);
     return Scaffold(
       appBar: AppBar(
-        title: AppText(data: "All Incomes",),
+        backgroundColor: scaffoldColor,
+        title: AppText(data: "All Incomes",color: Colors.white,),
       ),
 
       body: Padding(
@@ -27,7 +29,7 @@ class ListIncomeTransactions extends StatelessWidget {
           future: authService.getCurrentUser(),
           builder: (context,snapshot){
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }else{
@@ -41,7 +43,7 @@ class ListIncomeTransactions extends StatelessWidget {
 
                     builder: (context,snapshot){
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
+                        return const Center(
                           child: CircularProgressIndicator(),
                         );
                       }else{
@@ -56,7 +58,7 @@ class ListIncomeTransactions extends StatelessWidget {
 
                               AppText(data: "Total Income $totalIncome",color: Colors.white,),
                               const SizedBox(height: 10,),
-                              MyDivider(),
+                              const MyDivider(),
                               const SizedBox(height: 10,),
                               Expanded(child: ListView.builder(
 
@@ -76,13 +78,13 @@ class ListIncomeTransactions extends StatelessWidget {
                                                 return Container(
                                                   height: 150,
                                                   width: MediaQuery.of(context).size.width,
-                                                  padding: EdgeInsets.all(20),
+                                                  padding: const EdgeInsets.all(20),
                                                   child: Column(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
 
-                                                      AppText(data: "${expense.category}"),
-                                                      AppText(data: "${expense.description}"),
+                                                      AppText(data: expense.category),
+                                                      AppText(data: expense.description),
                                                       AppText(data: "${expense.amount}"),
                                                       AppText(data: "${expense.createdAt}"),
 

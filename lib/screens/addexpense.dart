@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:uuid/uuid.dart';
 
 class AddExpensePage extends StatefulWidget {
+  // ignore: prefer_typing_uninitialized_variables
   final uid;
   const AddExpensePage({super.key,this.uid});
 
@@ -19,8 +20,8 @@ class AddExpensePage extends StatefulWidget {
 }
 
 class _AddExpensePageState extends State<AddExpensePage> {
-  TextEditingController _amountController = TextEditingController();
-  TextEditingController _descController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _descController = TextEditingController();
   String? category;
 
   final _expeKey = GlobalKey<FormState>();
@@ -48,23 +49,24 @@ class _AddExpensePageState extends State<AddExpensePage> {
     return Scaffold(
 
       appBar: AppBar(
-        title: AppText(data: "Add Expense",),
+        backgroundColor: scaffoldColor,
+        title: AppText(data: "Add Expense",color: Colors.white,),
       ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         child: Form(
           key: _expeKey,
           child: Column(
             children: [
               DropdownButtonFormField(
                 dropdownColor: scaffoldColor,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 value: category, // Add this line to set the current value
                 onChanged: (value) {
                   setState(() {
-                    category = value as String?;
+                    category = value;
                   });
                 },
                 validator: (value) {
@@ -76,24 +78,22 @@ class _AddExpensePageState extends State<AddExpensePage> {
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide: const BorderSide(color: Colors.white),
                   ),
-                  hintStyle: TextStyle(color: Colors.white),
+                  hintStyle: const TextStyle(color: Colors.white),
                   hintText: "Select Category",
                 ),
-                items: expenseCategories
-                    .map((item) => DropdownMenuItem(
-                  value: item,
+                items: expenseCategories.map((item) => DropdownMenuItem( value: item,
                   child: AppText(data: item),
                 ))
                     .toList(),
               ),
 
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               CustomTextFormField(
@@ -106,7 +106,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     return null;
                   },
                   controller:_descController, hintText: "Description")
-             , SizedBox(
+             , const SizedBox(
                 height: 20,
               ),
               CustomTextFormField(
@@ -119,7 +119,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     return null;
                   },
                   controller: _amountController, hintText: "Enter the Amount"),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Center(
@@ -130,7 +130,7 @@ class _AddExpensePageState extends State<AddExpensePage> {
                     onTap: () async{
                       print("hello");
 
-                      var uuid=Uuid().v1();
+                      var uuid=const Uuid().v1();
           
                       if (_expeKey.currentState!.validate()) {
 

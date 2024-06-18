@@ -16,10 +16,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
 
   final _regKey = GlobalKey<FormState>();
   @override
@@ -29,7 +29,7 @@ class _RegisterPageState extends State<RegisterPage> {
     return Scaffold(
       appBar: AppBar(backgroundColor: scaffoldColor ,),
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         height: double.infinity,
         width: double.infinity,
         child: Form(
@@ -112,14 +112,14 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: Colors.deepOrange,
                             onTap: () async {
                               //creating a unique id
-                              var uuid=Uuid().v1();
+                              var uuid=const Uuid().v1();
 
                               if (_regKey.currentState!.validate()) {
                                 showDialog(
                                     context: context,
                                     barrierDismissible: false,
                                     builder: (context) {
-                                      return Center(
+                                      return const Center(
                                         child: CircularProgressIndicator(),
                                       );
                                     });
@@ -132,12 +132,14 @@ class _RegisterPageState extends State<RegisterPage> {
                                     status: 1);
 
                                 final res= await authService.registerUser(user);
+                                // ignore: use_build_context_synchronously
                                 Navigator.pop(context);
 
                                 if(res==true){
 
 
 
+                                  // ignore: use_build_context_synchronously
                                   Navigator.pop(context);
                                 }
 
@@ -158,7 +160,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             data: "Already have an Account?",
                             color: Colors.white,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           InkWell(

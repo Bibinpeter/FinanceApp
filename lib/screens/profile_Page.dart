@@ -20,34 +20,34 @@ class ProfilePage extends StatelessWidget {
           future: authService.getCurrentUser(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return CircularProgressIndicator();
+              return const CircularProgressIndicator();
             } else {
               if (snapshot.hasData) {
                 final user = snapshot.data!;
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
+                    const CircleAvatar(
                       radius: 50,
 
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     AppText(
                      data: 'Name: ${user.name}',
                     color: Colors.white,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     AppText(
                      data: 'Email: ${user.email}',
                      color: Colors.white,
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     AppText(
                       data: 'Phone: ${user.phone}',
                       color: Colors.white,
                     ),
 
-                    SizedBox(height: 20,),
+                    const SizedBox(height: 20,),
                     
                     AppButton(
                         height: 45,
@@ -59,13 +59,14 @@ class ProfilePage extends StatelessWidget {
 
                          if(data==true){
 
+                           // ignore: use_build_context_synchronously
                            Navigator.pushNamedAndRemoveUntil(context, 'login', (route) => false);
                          }
                         }, child: AppText(data: "Logout",color: Colors.white,))
                   ],
                 );
               } else {
-                return Text('No user logged in');
+                return const Text('No user logged in');
               }
             }
           },

@@ -15,8 +15,8 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
 
-  TextEditingController _emailController=TextEditingController();
-  TextEditingController _passwordController=TextEditingController();
+  final TextEditingController _emailController=TextEditingController();
+  final TextEditingController _passwordController=TextEditingController();
 
   final _loginKey=GlobalKey<FormState>();
   @override
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
 
       body: Container(
-        padding: EdgeInsets.all(20),
+        padding: const EdgeInsets.all(20),
         height: double.infinity,
         width: double.infinity,
         child: Form(
@@ -89,12 +89,15 @@ class _LoginPageState extends State<LoginPage> {
                               );
                             });
                        final user=await authService.loginUser(_emailController.text.trim(), _passwordController.text);
+                        // ignore: use_build_context_synchronously
                         Navigator.pop(context);
                         if(user!=null){
+                          // ignore: use_build_context_synchronously
                           Navigator.pushNamedAndRemoveUntil(context,'Home', (route) => false,);
                         }else{
 
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          // ignore: use_build_context_synchronously
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                               backgroundColor: Colors.red,
                               content: Text("No user exists")));
                         }
@@ -109,7 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   
                   AppText(data: "Don't have an Account?",color: Colors.white,),
-                  SizedBox(width: 10,),
+                  const SizedBox(width: 10,),
                   InkWell(
                       onTap: (){
 

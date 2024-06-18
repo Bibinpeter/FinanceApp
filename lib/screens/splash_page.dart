@@ -12,6 +12,7 @@ class SplashPage extends StatefulWidget {
   State<SplashPage> createState() => _Splash_PageState();
 }
 
+// ignore: camel_case_types
 class _Splash_PageState extends State<SplashPage> {
 
   @override
@@ -23,12 +24,15 @@ class _Splash_PageState extends State<SplashPage> {
 
 
   Future<void>checkLoginState()async{
-    await Future.delayed(Duration(seconds: 4));
+    await Future.delayed(const Duration(seconds: 4));
+    // ignore: use_build_context_synchronously
     final authService=Provider.of<AuthService>(context,listen: false);
     final isLoggedIn=await authService.isUserLoggedIn();
      if(isLoggedIn){
+      // ignore: use_build_context_synchronously
       Navigator.pushNamedAndRemoveUntil(context, 'Home',(routes)=>false);
      }else{
+      // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context,'login');
      }
   }
@@ -37,6 +41,7 @@ class _Splash_PageState extends State<SplashPage> {
 
 
 
+  // ignore: annotate_overrides
   Widget build(BuildContext context) {
     return  Scaffold(
       backgroundColor: Colors.white,

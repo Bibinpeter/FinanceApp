@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -85,7 +85,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                   builder: (context, snapshot) {
                     print('FutureBuilder snapshot: ${snapshot.connectionState}');
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return Center(
+                      return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.deepOrangeAccent,
                         ),
@@ -95,7 +95,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       return Center(
                         child: Text(
                           'Error: ${snapshot.error}',
-                          style: TextStyle(color: Colors.red),
+                          style: const TextStyle(color: Colors.red),
                         ),
                       );
                     } else if (snapshot.hasData) {
@@ -112,17 +112,17 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                     data: "Welcome!",
                                     color: Colors.white,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 10,
                                   ),
                                   AppText(
-                                    data: "${userData.name}",
+                                    data: userData.name,
                                     color: Colors.white,
                                     size: 26,
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               InkWell(
@@ -131,14 +131,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                 },
                                 child: CircleAvatar(
                                   child: Text(
-                                    "${userData.name[0].toUpperCase()}",
+                                    userData.name[0].toUpperCase(),
                                   ),
                                 ),
                               )
                             ],
                           ),
-                          MyDivider(),
-                          SizedBox(
+                          const MyDivider(),
+                          const SizedBox(
                             height: 20,
                           ),
                           DashboardItemWidget(
@@ -153,7 +153,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                             titleOne: "Expense\n $totalExpense",
                             titleTwo: "Income \n $totalIncome",
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 20,
                           ),
                           DashboardItemWidget(
@@ -169,7 +169,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                             titleTwo: "Add Income",
                           ),
                           Container(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -177,7 +177,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                   data: "Income vs Expense",
                                   color: Colors.white,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 AspectRatio(
@@ -191,14 +191,14 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                         color: chartColor1,
                                         value: finService.totalExpense,
                                         title: "Expense",
-                                        titleStyle: TextStyle(
+                                        titleStyle: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
                                       ),
                                       PieChartSectionData(
-                                        titleStyle: TextStyle(
+                                        titleStyle: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                       );
                     } else {
                       print('No user data available');
-                      return Center(
+                      return const Center(
                         child: Text(
                           'No user data available',
                           style: TextStyle(color: Colors.red),

@@ -17,8 +17,8 @@ class AddIncomePage extends StatefulWidget {
 }
 
 class _AddIncomePageState extends State<AddIncomePage> {
-  TextEditingController _amountController = TextEditingController();
-  TextEditingController _descController = TextEditingController();
+  final TextEditingController _amountController = TextEditingController();
+  final TextEditingController _descController = TextEditingController();
   String? category;
 
   final _incomeKey = GlobalKey<FormState>();
@@ -46,25 +46,26 @@ class _AddIncomePageState extends State<AddIncomePage> {
     final String userid = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: scaffoldColor,
         title: AppText(
-          data: "Add Income",
+          data: "Add Income",color: Colors.white,
         ),
       ),
       body: Container(
         height: double.infinity,
         width: double.infinity,
-        padding: EdgeInsets.all(20),
+        padding:const EdgeInsets.all(20),
         child: Form(
           key: _incomeKey,
           child: Column(
             children: [
               DropdownButtonFormField(
                 dropdownColor: scaffoldColor,
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
                 value: category, // Add this line to set the current value
                 onChanged: (value) {
                   setState(() {
-                    category = value as String?;
+                    category = value;
                   });
                 },
                 validator: (value) {
@@ -76,25 +77,23 @@ class _AddIncomePageState extends State<AddIncomePage> {
                 decoration: InputDecoration(
                   enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide:const BorderSide(color: Colors.white),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
-                    borderSide: BorderSide(color: Colors.white),
+                    borderSide:const BorderSide(color: Colors.white),
                   ),
-                  hintStyle: TextStyle(color: Colors.white),
+                 hintStyle:const TextStyle(color: Colors.white),
                   hintText: "Select Category",
                 ),
-                items:  incomeCategories
+                items: incomeCategories
                     .map((item) => DropdownMenuItem(
                           value: item,
                           child: AppText(data: item),
                         ))
                     .toList(),
               ),
-              SizedBox(
-                height: 20,
-              ),
+            const  SizedBox( height: 20,),
               CustomTextFormField(
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -104,9 +103,7 @@ class _AddIncomePageState extends State<AddIncomePage> {
                   },
                   controller: _descController,
                   hintText: "Description"),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox(  height: 20,),
               CustomTextFormField(
                   type: TextInputType.number,
                   validator: (value) {
@@ -117,18 +114,14 @@ class _AddIncomePageState extends State<AddIncomePage> {
                   },
                   controller: _amountController,
                   hintText: "Enter the Amount"),
-              SizedBox(
-                height: 20,
-              ),
+              const SizedBox( height: 20,),
               Center(
                 child: AppButton(
                     height: 48,
                     width: 250,
                     color: Colors.deepOrange,
                     onTap: () async {
-                      print("hello");
-
-                      var uuid = Uuid().v1();
+                      var uuid = const Uuid().v1();
 
                       if (_incomeKey.currentState!.validate()) {
                         IncomeModel income = IncomeModel(
@@ -150,13 +143,9 @@ class _AddIncomePageState extends State<AddIncomePage> {
                           },
                         );
 
-
-
-                        // Close the dialog after 4 seconds
-                        Future.delayed(Duration(seconds: 4), () {
+                        Future.delayed(const Duration(seconds: 4), () {
                           Navigator.pop(context);
                         }).then((value) => Navigator.pop(context));
-
                       }
                     },
                     child: AppText(

@@ -54,8 +54,7 @@ class UserService with ChangeNotifier {
   Future<void> _calculateTotalIncome(String uid) async {
     final List<IncomeModel> incomes = await getAllIncome(uid);
 
-    _totalIncome = incomes.fold(
-        0.0, (previousValue, income) => previousValue + income.amount);
+    _totalIncome = incomes.fold( 0.0, (previousValue, income) => previousValue + income.amount);
 
   notifyListeners();
   }
@@ -63,8 +62,7 @@ class UserService with ChangeNotifier {
   Future<void> _calculateTotalExpense(String uid) async {
     final List<ExpenseModel> expenses = await getAllExpense(uid);
 
-    _totalExpense = expenses.fold(
-        0.0, (previousValue, expense) => previousValue + expense.amount);
+    _totalExpense = expenses.fold( 0.0, (previousValue, expense) => previousValue + expense.amount);
 
  notifyListeners();
   }
