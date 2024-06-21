@@ -25,7 +25,6 @@ void main() async {
   await AuthService().openBox();
   await UserService().openIncomeBox();
   await UserService().openExpenseBox();
-
   runApp(const MyApp());
 }
 
@@ -36,12 +35,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-
-
         ChangeNotifierProvider(create: (context) => AuthService()),
         ChangeNotifierProvider(create: (context) => UserService()),
-
-
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
