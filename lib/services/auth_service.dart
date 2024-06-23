@@ -10,7 +10,7 @@ class AuthService with ChangeNotifier {
 
   Future<void> openBox() async {
     _userBox = await Hive.openBox<UserModel>('users');
-    print('Box opened: $_userBox');
+   // print('Box opened: $_userBox');
   }
 
   // Register user
@@ -21,7 +21,7 @@ class AuthService with ChangeNotifier {
 
     await _userBox?.add(user);
     notifyListeners();
-    print("User registered successfully");
+    //print("User registered successfully");
     return true;
   }
 
@@ -43,7 +43,7 @@ class AuthService with ChangeNotifier {
     final pref = await SharedPreferences.getInstance();
     await pref.setBool(_loggedInKey, isLoggedIn);
     await pref.setString('id', id);
-    print("Logged in state set to $isLoggedIn for user $id");
+    //print("Logged in state set to $isLoggedIn for user $id");
   }
 
   Future<bool> isUserLoggedIn() async {
@@ -57,20 +57,20 @@ class AuthService with ChangeNotifier {
     }
 
     final isLoggedIn = await isUserLoggedIn();
-    print('Is user logged in: $isLoggedIn');
+   // print('Is user logged in: $isLoggedIn');
     if (isLoggedIn) {
       final loggedInUserId = await getCurrentUserId();
-      print('Logged in user ID: $loggedInUserId');
+    //  print('Logged in user ID: $loggedInUserId');
       if (loggedInUserId != null && _userBox != null) {
         for (var user in _userBox!.values) {
           if (user.id == loggedInUserId) {
-            print('User found: ${user.name}');
+          //  print('User found: ${user.name}');
             return user;
           }
         }
       }
     }
-    print('No user found');
+   // print('No user found');
     return null;
   }
 

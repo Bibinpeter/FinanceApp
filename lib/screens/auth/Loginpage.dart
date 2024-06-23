@@ -5,7 +5,6 @@ import 'package:personalfinanceapp/widgets/apptext.dart';
 import 'package:personalfinanceapp/widgets/cutomtextformfield.dart';
 import 'package:provider/provider.dart';
 
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -14,16 +13,14 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  final TextEditingController _emailController=TextEditingController();
-  final TextEditingController _passwordController=TextEditingController();
-
-  final _loginKey=GlobalKey<FormState>();
+  final _loginKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     return Scaffold(
-
       body: Container(
         padding: const EdgeInsets.all(20),
         height: double.infinity,
@@ -34,52 +31,49 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              AppText(data: "Login",color: Colors.white,size: 22,),
-              const SizedBox(height: 20,),
-              CustomTextFormField(
-                validator: (value){
-
-                if(value!.isEmpty){
-
-                  return "Email is Mandatory";
-                }
-                return null;
-                },
-                  controller: _emailController,
-                  hintText: "Email"
-
+              AppText(
+                data: "Login",
+                color: Colors.white,
+                size: 22,
               ),
-              const SizedBox(height: 20,),
-
+              const SizedBox(
+                height: 20,
+              ),
               CustomTextFormField(
-                  validator: (value){
-
-                    if(value!.isEmpty){
-
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return "Email is Mandatory";
+                    }
+                    return null;
+                  },
+                  controller: _emailController,
+                  hintText: "Email"),
+              const SizedBox(
+                height: 20,
+              ),
+              CustomTextFormField(
+                  validator: (value) {
+                    if (value!.isEmpty) {
                       return "Password is Mandatory";
                     }
-                    if(value.length<6){
+                    if (value.length < 6) {
                       return "Password Should be grater than 6 characters";
                     }
                     return null;
                   },
-                obscureText: true,
+                  obscureText: true,
                   controller: _passwordController,
-                  hintText: "Password"
-
+                  hintText: "Password"),
+              const SizedBox(
+                height: 20,
               ),
-              const SizedBox(height: 20,),
-              
               Center(
                 child: AppButton(
                     height: 52,
                     width: 250,
                     color: Colors.deepOrange,
-                    onTap: () async{
-
-                      if(_loginKey.currentState!.validate()){
-
-
+                    onTap: () async {
+                      if (_loginKey.currentState!.validate()) {
                         showDialog(
                             context: context,
                             barrierDismissible: false,
@@ -88,43 +82,55 @@ class _LoginPageState extends State<LoginPage> {
                                 child: CircularProgressIndicator(),
                               );
                             });
-                       final user=await authService.loginUser(_emailController.text.trim(), _passwordController.text);
+                        final user = await authService.loginUser(
+                            _emailController.text.trim(),
+                            _passwordController.text);
                         // ignore: use_build_context_synchronously
                         Navigator.pop(context);
-                        if(user!=null){
+                        if (user != null) {
                           // ignore: use_build_context_synchronously
-                          Navigator.pushNamedAndRemoveUntil(context,'Home', (route) => false,);
-                        }else{
-
+                          Navigator.pushNamedAndRemoveUntil(
+                            context,
+                            'Home',
+                            (route) => false,
+                          );
+                        } else {
                           // ignore: use_build_context_synchronously
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                              backgroundColor: Colors.red,
-                              content: Text("No user exists")));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  backgroundColor: Colors.red,
+                                  content: Text("No user exists")));
                         }
-
                       }
-                    }, child: AppText(data: "Login",color: Colors.white,)),
+                    },
+                    child: AppText(
+                      data: "Login",
+                      color: Colors.white,
+                    )),
               ),
-              const SizedBox(height: 40,),
-              
+              const SizedBox(
+                height: 40,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  
-                  AppText(data: "Don't have an Account?",color: Colors.white,),
-                  const SizedBox(width: 10,),
+                  AppText(
+                    data: "Don't have an Account?",
+                    color: Colors.white,
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
                   InkWell(
-                      onTap: (){
-
+                      onTap: () {
                         Navigator.pushNamed(context, 'register');
                       },
-                      child: AppText(data: "Register",color: Colors.white,))
+                      child: AppText(
+                        data: "Register",
+                        color: Colors.white,
+                      ))
                 ],
               )
-              
-              
-              
-
             ],
           ),
         ),

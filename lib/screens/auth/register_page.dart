@@ -27,7 +27,9 @@ class _RegisterPageState extends State<RegisterPage> {
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
-      appBar: AppBar(backgroundColor: scaffoldColor ,),
+      appBar: AppBar(
+        backgroundColor: scaffoldColor,
+      ),
       body: Container(
         padding: const EdgeInsets.all(20),
         height: double.infinity,
@@ -112,7 +114,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: Colors.deepOrange,
                             onTap: () async {
                               //creating a unique id
-                              var uuid=const Uuid().v1();
+                              var uuid = const Uuid().v1();
 
                               if (_regKey.currentState!.validate()) {
                                 showDialog(
@@ -124,25 +126,23 @@ class _RegisterPageState extends State<RegisterPage> {
                                       );
                                     });
 
-                                UserModel user=UserModel(
-                                    id:uuid ,
+                                UserModel user = UserModel(
+                                    id: uuid,
                                     email: _emailController.text.trim(),
                                     password: _passwordController.text.trim(),
-                                    name:_nameController.text, phone: _phoneController.text,
+                                    name: _nameController.text,
+                                    phone: _phoneController.text,
                                     status: 1);
 
-                                final res= await authService.registerUser(user);
+                                final res =
+                                    await authService.registerUser(user);
                                 // ignore: use_build_context_synchronously
                                 Navigator.pop(context);
 
-                                if(res==true){
-
-
-
+                                if (res == true) {
                                   // ignore: use_build_context_synchronously
                                   Navigator.pop(context);
                                 }
-
                               }
                             },
                             child: AppText(
