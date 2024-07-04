@@ -90,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
                         if (user != null) {
                           // ignore: use_build_context_synchronously
                           Navigator.pushNamedAndRemoveUntil(
+                            // ignore: use_build_context_synchronously
                             context,
                             'Home',
                             (route) => false,

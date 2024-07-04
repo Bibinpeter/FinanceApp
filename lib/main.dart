@@ -8,7 +8,7 @@ import 'package:personalfinanceapp/screens/add_income.dart';
 import 'package:personalfinanceapp/screens/addexpense.dart';
 import 'package:personalfinanceapp/screens/auth/Loginpage.dart';
 import 'package:personalfinanceapp/screens/auth/register_page.dart';
-import 'package:personalfinanceapp/screens/auth/splash_page.dart';
+import 'package:personalfinanceapp/screens/auth/splash.dart';
 import 'package:personalfinanceapp/screens/home.dart';
 import 'package:personalfinanceapp/screens/list_exp_transaction.dart';
 import 'package:personalfinanceapp/screens/list_income_transaction.dart';
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
                 displaySmall: TextStyle(color: Colors.white, fontSize: 17))),
         initialRoute: '/',
         routes: {
-          '/': (context) => const SplashPage(),
+          '/': (context) =>   const SplashPage(),
           'login': (context) => const LoginPage(),
           'register': (context) => const RegisterPage(),
           'Home': (context) => const HomePage(),
